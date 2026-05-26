@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulário: Em Casa</title>
+    
+    <!-- Importação dos Ícones do Google -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* --- TELA 1: MENU INICIAL --- */
+        #tela-inicial {
+            display: flex;
+            width: 100%;
+            max-width: 400px;
+            height: 80vh;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-modulo-casa {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to bottom, #4c4c4c 0%, #2c2c2c 50%, #111111 51%, #2b2b2b 100%);
+            border: 2px solid #111;
+            border-radius: 12px;
+            padding: 25px 30px;
+            cursor: pointer;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 6px 10px rgba(0,0,0,0.4);
+            width: 85%;
+            box-sizing: border-box;
+            transition: transform 0.1s;
+        }
+
+        .btn-modulo-casa:active {
+            transform: scale(0.96);
+            background: linear-gradient(to bottom, #111111 0%, #2b2b2b 100%);
+        }
+
+        .btn-modulo-casa .texto-modulo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-right: 20px;
+            text-shadow: 0 -1px 0 rgba(0,0,0,0.7);
+        }
+
+        .btn-modulo-casa .icone-modulo {
+            font-size: 60px;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* --- TELA 2: GRADE DO JOGO (Inicia Escondida) --- */
+        #tela-jogo {
+            display: none;
+            width: 100%;
+            max-width: 450px;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .topo-jogo {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .btn-voltar {
+            background: #2c2c2c;
+            color: white;
+            border: 1px solid #111;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .titulo-jogo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin: 0;
+        }
+
+        /* Grade adaptada para dedos grandes em smartphones */
+        .grid-itens {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        /* Botão do Item (Estilo Metálico Robusto) */
+        .card-item {
+            background: linear-gradient(to bottom, #4c4c4c 0%, #2c2c2c 50%, #111111 51%, #2b2b2b 100%);
+            border: 1px solid #111;
+            border-radius: 12px;
+            padding: 22px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 4px 6px rgba(0,0,0,0.3);
+            transition: transform 0.05s;
+        }
+
+        .card-item:active {
+            transform: scale(0.95);
+            background: linear-gradient(to bottom, #111111 0%, #2b2b2b 100%);
+        }
+
+        /* Ícones Grandes conforme combinado para Celular */
+        .card-item .material-icons {
+            font-size: 65px;
+            color: #fff;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.6);
+        }
+
+        .card-item .nome-pt {
+            color: #ddd;
+            font-size: 0.95rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        /* Texto de Conferência abaixo do botão (Revelado após o clique) */
+        .confere-traducao {
+            color: #ffeb3b;
+            font-size: 0.95rem;
+            font-weight: bold;
+            margin-top: 5px;
+            display: none; /* Escondido por padrão */
+            text-align: center;
+            background-color: rgba(0,0,0,0.4);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* --- BARRA FIXA DE FEEDBACK E COMANDOS DE VOZ --- */
+        #barra-status {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 450px;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.05rem;
+            background-color: #e0e0e0;
+            color: #333;
+            border-top: 2px solid #bbb;
+            box-sizing: border-box;
+            z-index: 10;
+        }
+
+        .status-escutando { background-color: #bbdefb !important; color: #0d47a1 !important; border-top-color: #2196f3 !important; }
+        .status-acerto { background-color: #c8e6c9 !important; color: #254727 !important; border-top-color: #4caf50 !important; }
+        .status-erro { background-color: #ffcdd2 !important; color: #c62828 !important; border-top-color: #f44336 !important; }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== TELA 1: MENU INICIAL ==================== -->
+    <div id="tela-inicial">
+        <div class="btn-modulo-casa" onclick="mudarTela('jogo')">
+            <span class="texto-modulo">Em Casa</span>
+            <span class="material-icons icone-modulo">home</span>
+        </div>
+    </div>
+
+
+    <!-- ==================== TELA 2: QUADRO DO JOGO ==================== -->
+    <div id="tela-jogo">
+        <div class="topo-jogo">
+            <button class="btn-voltar" onclick="mudarTela('inicial')">« Voltar</button>
+            <h2 class="titulo-jogo">Toque e Fale em Espanhol</h2>
+        </div>
+
+        <!-- Grade de Itens (24 itens de suma importância) -->
+        <div class="grid-itens">
+            
+            <!-- SALA -->
+            <div class="card-item" onclick="escutarItem(this, ['televisión', 'tele', 'televisor'], 'La televisión')">
+                <span class="material-icons">tv</span>
+                <span class="nome-pt">Televisão</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <div class="card-item" onclick="escutarItem(this, ['sofá', 'sillon'], 'El sofá')">
+                <span class="material-icons">weekend</span>
+                <span class="nome-pt">Sofá</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <div class="card-item" onclick="escutarItem(this, ['puerta'], 'La puerta')">
+                <span class="material-icons">door_front</span>
+                <span class="nome-pt">Porta</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <div class="card-item" onclick="escutarItem(this, ['ventana'], 'La ventana')">
+                <span class="material-icons">window</span>
+                <span class="nome-pt">Janela</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <div class="card-item" onclick="escutarItem(this, ['llave'], 'La llave')">
+                <span class="material-icons">vpn_key</span>
+                <span class="nome-pt">Chave</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <!-- COZINHA -->
+            <div class="card-item" onclick="escutarItem(this, ['mesa'], 'La mesa')">
+                <span class="material-icons">table_restaurant</span>
+                <span class="nome-pt">Mesa</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <div class="card-item" onclick="escutarItem(this, ['silla'], 'La silla')">
+                <span class="material-icons">chair</span>
+                <span class="nome-pt">Cadeira</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <div class="card-item" onclick="escutarItem(this, ['nevera', 'refrigerador'], 'La nevera')">
+                <span class="material-icons">kitchen</span>
+                <span class="nome-pt">Geladeira</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <div class="card-item" onclick="escutarItem(this, ['tenedor'], 'El tenedor')">
+                <span class="material-icons">restaurant</span>
+                <span class="nome-pt">Garfo</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <div class="card-item" onclick="escutarItem(this, ['cuchara'], 'La cuchara')">
+                <span class="material-icons">spoon</span>
+                <span class="nome-pt">Colher</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <div class="card-item" onclick="escutarItem(this, ['cuchillo'], 'El cuchillo')">
+                <span class="material-icons">flatware</span>
+                <span class="nome-pt">Faca</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <div class="card-item" onclick="escutarItem(this, ['vaso'], 'El vaso')">
+                <span class="material-icons">local_drink</span>
+                <span class="nome-pt">Copo</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <div class="card-item" onclick="escutarItem(this, ['taza'], 'La taza')">
+                <span class="material-icons">local_cafe</span>
+                <span class="nome-pt">Xícara / Caneca</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <div class="card-item" onclick="escutarItem(this, ['plato'], 'El plato')">
+                <span class="material-icons">dinner_dining</span>
+                <span class="nome-pt">Prato</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <!-- QUARTO -->
+            <div class="card-item" onclick="escutarItem(this, ['cama'], 'La cama')">
+                <span class="material-icons">bed</span>
+                <span class="nome-pt">Cama</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <div class="card-item" onclick="escutarItem(this, ['almohada'], 'La almohada')">
+                <span class="material-icons">hotel</span>
+                <span class="nome-pt">Travesseiro</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <div class="card-item" onclick="escutarItem(this, ['armario', 'ropero'], 'El armario')">
+                <span class="material-icons">door_sliding</span>
+                <span class="nome-pt">Guarda-Roupa</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <div class="card-item" onclick="escutarItem(this, ['computadora', 'ordenador'], 'La computadora')">
+                <span class="material-icons">computer</span>
+                <span class="nome-pt">Computador</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <!-- BANHEIRO & LIMPEZA -->
+            <div class="card-item" onclick="escutarItem(this, ['espejo'], 'El espejo')">
+                <span class="material-icons">lookup</span>
+                <span class="nome-pt">Espelho</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <div class="card-item" onclick="escutarItem(this, ['ducha', 'bañera'], 'La ducha')">
+                <span class="material-icons">shower</span>
+                <span class="nome-pt">Chuveiro</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <div class="card-item" onclick="escutarItem(this, ['jabón', 'jabon'], 'El jabón')">
+                <span class="material-icons">soap</span>
+                <span class="nome-pt">Sabonete</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <div class="card-item" onclick="escutarItem(this, ['toalla'], 'La toalla')">
+                <span class="material-icons">dry_cleaning</span>
+                <span class="nome-pt">Toalha</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <div class="card-item" onclick="escutarItem(this, ['escoba'], 'La escoba')">
+                <span class="material-icons">cleaning_services</span>
+                <span class="nome-pt">Vassoura</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+            <div class="card-item" onclick="escutarItem(this, ['teléfono', 'celular', 'telefono'], 'El teléfono')">
+                <span class="material-icons">smartphone</span>
+                <span class="nome-pt">Celular</span>
+                <div class="confere-traducao"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Barra de Status inferior e persistente para o celular -->
+    <div id="barra-status">Toque em qualquer item para praticar.</div>
+
+    <script>
+        const barraStatus = document.getElementById('barra-status');
+        let respostasEsperadas = [];
+        let elementoCardAtual = null;
+        let traducaoParaMostrar = "";
+
+        // Controle de Telas Virtuais
+        function mudarTela(tela) {
+            if (tela === 'jogo') {
+                document.getElementById('tela-inicial').style.display = 'none';
+                document.getElementById('tela-jogo').style.display = 'flex';
+                barraStatus.style.display = 'block';
+            } else {
+                document.getElementById('tela-inicial').style.display = 'flex';
+                document.getElementById('tela-jogo').style.display = 'none';
+                barraStatus.style.display = 'none';
+            }
+        }
+        // Inicializa escondendo a barra na tela um
+        mudarTela('inicial');
+
+        // Configuração do Reconhecedor de Fala Móvel
+        const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
+        let gravador = null;
+
+        if (Speech) {
+            gravador = new Speech();
+            gravador.lang = 'es-ES';
+            gravador.interimResults = false;
+            gravador.maxAlternatives = 1;
+
+            gravador.onresult = (event) => {
+                const falaUsuario = event.results[0][0].transcript.trim().toLowerCase();
+                
+                // Remove pontuações comuns que o motor de voz insere
+                const falaLimpa = falaUsuario.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+
+                // Validação do Acerto ou Erro
+                if (respostasEsperadas.includes(falaLimpa)) {
+                    barraStatus.className = "status-acerto";
+                    barraStatus.innerText = `¡Perfeito! Você disse: "${falaUsuario}"`;
+                } else {
+                    barraStatus.className = "status-erro";
+                    barraStatus.innerText = `Ops, ouvi: "${falaUsuario}".`;
+                }
+
+                // Revela a tradução correta abaixo do botão clicado (para conferência)
+                if (elementoCardAtual) {
+                    const boxTraducao = elementoCardAtual.querySelector('.confere-traducao');
+                    boxTraducao.innerText = traducaoParaMostrar;
+                    boxTraducao.style.display = 'block';
+                }
+            };
+
+            gravador.onerror = () => {
+                barraStatus.className = "";
+                barraStatus.innerText = "Não entendi o áudio. Tente clicar e falar novamente.";
+            };
+        }
+
+        // Função de clique no item
+        function escutarItem(elementoCard, listaEspanhol, stringTraducao) {
+            if (!gravador) {
+                barraStatus.innerText = "Recurso de voz indisponível neste celular.";
+                return;
+            }
+
+            elementoCardAtual = elementoCard;
+            respostasEsperadas = listaEspanhol;
+            traducaoParaMostrar = stringTraducao;
+
+            barraStatus.className = "status-escutando";
+            barraStatus.innerText = "Ouvindo... Fale agora em Espanhol!";
+
+            try {
+                gravador.start();
+            } catch (e) {
+                gravador.stop();
+                setTimeout(() => gravador.start(), 250);
+            }
+        }
+    </script>
+</body>
+</html>
