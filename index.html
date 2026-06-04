@@ -2,11 +2,9 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <!-- Bloqueio total de zoom e ajuste fino de margens nativas -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-    <title>Vocabulário: Em Casa</title>
+    <title>Voz Luno - Vocabulário</title>
     
-    <!-- Importação dos Ícones do Google -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
     <style>
@@ -29,42 +27,91 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* --- TELA 1: MENU INICIAL --- */
+        /* --- CABEÇALHO DO MASCOTE --- */
+        .header-mascote {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border-radius: 12px;
+            padding: 10px 16px;
+            width: 100%;
+            max-width: 360px;
+            box-sizing: border-box;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .mascote-emoji {
+            font-size: 40px;
+            margin-right: 12px;
+        }
+
+        .mascote-textos {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .txt-principal {
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .txt-secundario {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        /* --- TELA 1: MENU SELEÇÃO DE CATEGORIAS --- */
         #tela-inicial {
             display: flex;
             width: 100%;
-            height: 75vh;
+            max-width: 360px;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            gap: 12px;
+            padding-bottom: 80px;
             box-sizing: border-box;
         }
 
-        .btn-modulo-casa {
+        .titulo-menu {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #444;
+            text-align: center;
+            margin: 5px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-categoria {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             background: linear-gradient(to bottom, #4c4c4c 0%, #2c2c2c 50%, #111111 51%, #2b2b2b 100%);
-            border: 2px solid #111;
+            border: 1px solid #111;
             border-radius: 12px;
-            padding: 20px;
+            padding: 16px 20px;
             cursor: pointer;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 6px 10px rgba(0,0,0,0.4);
-            width: 90%;
-            max-width: 340px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 4px 6px rgba(0,0,0,0.3);
+            width: 100%;
             box-sizing: border-box;
         }
 
-        .btn-modulo-casa .texto-modulo {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-right: 15px;
+        .btn-categoria:active {
+            transform: scale(0.98);
         }
 
-        .btn-modulo-casa .icone-modulo {
-            font-size: 45px;
-            color: #fff;
+        .btn-categoria .texto-cat {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+        }
+
+        .btn-categoria .icone-cat {
+            font-size: 28px;
+            color: #ffeb3b;
         }
 
         /* --- TELA 2: QUADRO DO JOGO --- */
@@ -77,7 +124,6 @@
             align-items: center;
         }
 
-        /* Topo alinhado com o padrão de coluna única */
         .topo-jogo {
             display: flex;
             width: 100%;
@@ -110,23 +156,22 @@
             margin-left: 10px;
         }
 
-        /* Alterado estritamente para UMA COLUNA centralizada */
+        /* DUAS COLUNAS PERFEITAS VOLTANDO AO SEU PADRÃO ORIGINAL */
         .grid-itens {
             display: grid;
-            grid-template-columns: 1fr !important; 
-            gap: 14px;
+            grid-template-columns: repeat(2, 1fr) !important; 
+            gap: 12px;
             width: 100%;
-            max-width: 360px; /* Mantém um tamanho elegante em qualquer celular */
+            max-width: 360px;
             box-sizing: border-box;
-            padding-bottom: 90px;
+            padding-bottom: 100px;
         }
 
-        /* Botão do Item adaptado para largura total da coluna */
         .card-item {
             background: linear-gradient(to bottom, #4c4c4c 0%, #2c2c2c 50%, #111111 51%, #2b2b2b 100%);
             border: 1px solid #111;
             border-radius: 12px;
-            padding: 16px 10px;
+            padding: 14px 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -138,41 +183,38 @@
         }
 
         .card-item:active {
-            transform: scale(0.98);
+            transform: scale(0.96);
         }
 
-        /* Ícone reajustado para o novo layout de coluna */
         .card-item .material-icons {
-            font-size: 45px; 
+            font-size: 38px; 
             color: #fff;
             margin-bottom: 6px;
             text-shadow: 0 1px 3px rgba(0,0,0,0.6);
         }
 
-        /* Palavra em Português */
         .card-item .nome-pt {
             color: #fff;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             text-align: center;
             text-shadow: 0 1px 2px rgba(0,0,0,0.8);
         }
 
-        /* Caixa amarela de resposta em Espanhol */
         .confere-traducao {
             color: #ffeb3b;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: bold;
             margin-top: 6px;
             display: none;
             text-align: center;
-            background-color: rgba(0,0,0,0.6);
-            padding: 4px 12px;
+            background-color: rgba(0,0,0,0.7);
+            padding: 4px 8px;
             border-radius: 4px;
             width: auto;
-            max-width: 90%;
+            max-width: 95%;
             box-sizing: border-box;
         }
 
@@ -200,179 +242,182 @@
 </head>
 <body>
 
-    <!-- ==================== TELA 1: MENU INICIAL ==================== -->
-    <div id="tela-inicial">
-        <div class="btn-modulo-casa" onclick="mudarTela('jogo')">
-            <span class="texto-modulo">Em Casa</span>
-            <span class="material-icons icone-modulo">home</span>
+    <div class="header-mascote">
+        <div class="mascote-emoji">🦦</div>
+        <div class="mascote-textos">
+            <div class="txt-principal">Descubra o nome em espanhol</div>
+            <div class="txt-secundario">Toque no card e fale em espanhol!</div>
         </div>
     </div>
 
-    <!-- ==================== TELA 2: QUADRO DO JOGO ==================== -->
+    <div id="tela-inicial">
+        <div class="titulo-menu">Escolha uma Categoria:</div>
+        
+        <div class="btn-categoria" onclick="carregarCategoria('casa')">
+            <span class="texto-cat">Casa</span>
+            <span class="material-icons icone-cat">home</span>
+        </div>
+        
+        <div class="btn-categoria" onclick="carregarCategoria('restaurante')">
+            <span class="texto-cat">Restaurante</span>
+            <span class="material-icons icone-cat">restaurant_menu</span>
+        </div>
+        
+        <div class="btn-categoria" onclick="carregarCategoria('aeroporto')">
+            <span class="texto-cat">Aeroporto</span>
+            <span class="material-icons icone-cat">flight_takeoff</span>
+        </div>
+        
+        <div class="btn-categoria" onclick="carregarCategoria('loja')">
+            <span class="texto-cat">Loja / Compras</span>
+            <span class="material-icons icone-cat">shopping_bag</span>
+        </div>
+        
+        <div class="btn-categoria" onclick="carregarCategoria('lugares')">
+            <span class="texto-cat">Lugares Públicos</span>
+            <span class="material-icons icone-cat">signpost</span>
+        </div>
+        
+        <div class="btn-categoria" onclick="carregarCategoria('hotel')">
+            <span class="texto-cat">Hotel</span>
+            <span class="material-icons icone-cat">hotel</span>
+        </div>
+    </div>
+
     <div id="tela-jogo">
         <div class="topo-jogo">
             <button class="btn-voltar" onclick="mudarTela('inicial')">« Voltar</button>
-            <h2 class="titulo-jogo">Toque e Fale em Espanhol</h2>
+            <h2 class="titulo-jogo" id="titulo-categoria">Categoria</h2>
         </div>
 
-        <div class="grid-itens">
-            
-            <!-- SALA -->
-            <div class="card-item" onclick="escutarItem(this, ['televisión', 'tele', 'televisor'], 'La televisión')">
-                <span class="material-icons">tv</span>
-                <span class="nome-pt">Televisão</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <div class="card-item" onclick="escutarItem(this, ['sofá', 'sillon'], 'El sofá')">
-                <span class="material-icons">weekend</span>
-                <span class="nome-pt">Sofá</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <div class="card-item" onclick="escutarItem(this, ['puerta'], 'La puerta')">
-                <span class="material-icons">door_front</span>
-                <span class="nome-pt">Porta</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <div class="card-item" onclick="escutarItem(this, ['ventana'], 'La ventana')">
-                <span class="material-icons">window</span>
-                <span class="nome-pt">Janela</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <div class="card-item" onclick="escutarItem(this, ['llave'], 'La llave')">
-                <span class="material-icons">vpn_key</span>
-                <span class="nome-pt">Chave</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <!-- COZINHA -->
-            <div class="card-item" onclick="escutarItem(this, ['mesa'], 'La mesa')">
-                <span class="material-icons">table_restaurant</span>
-                <span class="nome-pt">Mesa</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <div class="card-item" onclick="escutarItem(this, ['silla'], 'La silla')">
-                <span class="material-icons">chair</span>
-                <span class="nome-pt">Cadeira</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <div class="card-item" onclick="escutarItem(this, ['nevera', 'refrigerador'], 'La nevera')">
-                <span class="material-icons">kitchen</span>
-                <span class="nome-pt">Geladeira</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <div class="card-item" onclick="escutarItem(this, ['tenedor'], 'El tenedor')">
-                <span class="material-icons">restaurant</span>
-                <span class="nome-pt">Garfo</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <div class="card-item" onclick="escutarItem(this, ['cuchara'], 'La cuchara')">
-                <span class="material-icons">spoon</span>
-                <span class="nome-pt">Colher</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <div class="card-item" onclick="escutarItem(this, ['cuchillo'], 'El cuchillo')">
-                <span class="material-icons">flatware</span>
-                <span class="nome-pt">Faca</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <div class="card-item" onclick="escutarItem(this, ['vaso'], 'El vaso')">
-                <span class="material-icons">local_drink</span>
-                <span class="nome-pt">Copo</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <div class="card-item" onclick="escutarItem(this, ['taza'], 'La taza')">
-                <span class="material-icons">local_cafe</span>
-                <span class="nome-pt">Xícara / Caneca</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <div class="card-item" onclick="escutarItem(this, ['plato'], 'El plato')">
-                <span class="material-icons">dinner_dining</span>
-                <span class="nome-pt">Prato</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <!-- QUARTO -->
-            <div class="card-item" onclick="escutarItem(this, ['cama'], 'La cama')">
-                <span class="material-icons">bed</span>
-                <span class="nome-pt">Cama</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <div class="card-item" onclick="escutarItem(this, ['almohada'], 'La almohada')">
-                <span class="material-icons">hotel</span>
-                <span class="nome-pt">Travesseiro</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <div class="card-item" onclick="escutarItem(this, ['armario', 'ropero'], 'El armario')">
-                <span class="material-icons">door_sliding</span>
-                <span class="nome-pt">Guarda-Roupa</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <div class="card-item" onclick="escutarItem(this, ['computadora', 'ordenador'], 'La computadora')">
-                <span class="material-icons">computer</span>
-                <span class="nome-pt">Computador</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <!-- BANHEIRO & LIMPEZA -->
-            <div class="card-item" onclick="escutarItem(this, ['espejo'], 'El espejo')">
-                <span class="material-icons">lookup</span>
-                <span class="nome-pt">Espelho</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <div class="card-item" onclick="escutarItem(this, ['ducha', 'bañera'], 'La ducha')">
-                <span class="material-icons">shower</span>
-                <span class="nome-pt">Chuveiro</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <div class="card-item" onclick="escutarItem(this, ['jabón', 'jabon'], 'El jabón')">
-                <span class="material-icons">soap</span>
-                <span class="nome-pt">Sabonete</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <div class="card-item" onclick="escutarItem(this, ['toalla'], 'La toalla')">
-                <span class="material-icons">dry_cleaning</span>
-                <span class="nome-pt">Toalha</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <div class="card-item" onclick="escutarItem(this, ['escoba'], 'La escoba')">
-                <span class="material-icons">cleaning_services</span>
-                <span class="nome-pt">Vassoura</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-            <div class="card-item" onclick="escutarItem(this, ['teléfono', 'celular', 'telefono'], 'El teléfono')">
-                <span class="material-icons">smartphone</span>
-                <span class="nome-pt">Celular</span>
-                <div class="confere-traducao"></div>
-            </div>
-
-        </div>
+        <div class="grid-itens" id="conteiner-cards"></div>
     </div>
 
-    <!-- Barra fixa no rodapé -->
-    <div id="barra-status">Toque em qualquer item para praticar.</div>
+    <div id="barra-status">Escolha uma categoria para começar.</div>
 
     <script>
+        // ==================== BANCO DE DADOS EXPANDIDO (100+ ITENS) ====================
+        const bancoCategorias = {
+            casa: [
+                { icon: 'tv', pt: 'Televisão', es: ['televisión', 'television', 'tele', 'televisor'], trad: 'La televisión' },
+                { icon: 'weekend', pt: 'Sofá', es: ['sofá', 'sofa', 'sillon', 'sillón'], trad: 'El sofá' },
+                { icon: 'door_front', pt: 'Porta', es: ['puerta'], trad: 'La puerta' },
+                { icon: 'window', pt: 'Janela', es: ['ventana'], trad: 'La ventana' },
+                { icon: 'vpn_key', pt: 'Chave', es: ['llave'], trad: 'La llave' },
+                { icon: 'table_restaurant', pt: 'Mesa', es: ['mesa'], trad: 'La mesa' },
+                { icon: 'chair', pt: 'Cadeira', es: ['silla'], trad: 'La silla' },
+                { icon: 'kitchen', pt: 'Geladeira', es: ['nevera', 'refrigerador'], trad: 'La nevera' },
+                { icon: 'bed', pt: 'Cama', es: ['cama'], trad: 'La cama' },
+                { icon: 'hotel', pt: 'Travesseiro', es: ['almohada'], trad: 'La almohada' },
+                { icon: 'door_sliding', pt: 'Guarda-Roupa', es: ['armario', 'ropero'], trad: 'El armario' },
+                { icon: 'computer', pt: 'Computador', es: ['computadora', 'ordenador'], trad: 'La computadora' },
+                { icon: 'shower', pt: 'Chuveiro', es: ['ducha'], trad: 'La ducha' },
+                { icon: 'bathtub', pt: 'Banheira', es: ['bañera', 'banera'], trad: 'La bañera' },
+                { icon: 'soap', pt: 'Sabonete', es: ['jabón', 'jabon'], trad: 'El jabón' },
+                { icon: 'dry_cleaning', pt: 'Toalha', es: ['toalla'], trad: 'La toalla' },
+                { icon: 'cleaning_services', pt: 'Vassoura', es: ['escoba'], trad: 'La escoba' },
+                { icon: 'smartphone', pt: 'Celular', es: ['teléfono', 'telefono', 'celular'], trad: 'El teléfono' }
+            ],
+            restaurante: [
+                { icon: 'restaurant_menu', pt: 'Cardápio / Menu', es: ['menú', 'menu', 'carta'], trad: 'El menú' },
+                { icon: 'flatware', pt: 'Talheres', es: ['cubiertos'], trad: 'Los cubiertos' },
+                { icon: 'person', pt: 'Garçom', es: ['camarero', 'mesero'], trad: 'El camarero' },
+                { icon: 'receipt_long', pt: 'Conta', es: ['cuenta'], trad: 'La cuenta' },
+                { icon: 'local_pizza', pt: 'Comida', es: ['comida'], trad: 'La comida' },
+                { icon: 'local_bar', pt: 'Bebida', es: ['bebida'], trad: 'La bebida' },
+                { icon: 'table_restaurant', pt: 'Mesa', es: ['mesa'], trad: 'La mesa' },
+                { icon: 'chair', pt: 'Cadeira', es: ['silla'], trad: 'La silla' },
+                { icon: 'wc', pt: 'Banheiro', es: ['baño', 'bano', 'aseo'], trad: 'El baño' },
+                { icon: 'restaurant', pt: 'Salada', es: ['ensalada'], trad: 'La ensalada' },
+                { icon: 'local_cafe', pt: 'Café', es: ['café', 'cafe'], trad: 'El café' },
+                { icon: 'cake', pt: 'Sobremesa', es: ['postre'], trad: 'El postre' },
+                { icon: 'local_drink', pt: 'Água', es: ['agua'], trad: 'El agua' },
+                { icon: 'wine_bar', pt: 'Vinho', es: ['vino'], trad: 'El vino' },
+                { icon: 'soup_kitchen', pt: 'Sopa', es: ['sopa'], trad: 'La sopa' },
+                { icon: 'bakery_dining', pt: 'Pão', es: ['pan'], trad: 'El pan' },
+                { icon: 'icecream', pt: 'Sorvete', es: ['helado'], trad: 'El helado' },
+                { icon: 'fastfood', pt: 'Hambúrguer', es: ['hamburguesa'], trad: 'La hamburguesa' },
+                { icon: 'takeout_dining', pt: 'Suco', es: ['jugo', 'zumo'], trad: 'El jugo' },
+                { icon: 'dinner_dining', pt: 'Prato', es: ['plato'], trad: 'El plato' },
+                { icon: 'paid', pt: 'Gorjeta', es: ['propina'], trad: 'La propina' },
+                { icon: 'flatware', pt: 'Garfo', es: ['tenedor'], trad: 'El tenedor' },
+                { icon: 'flatware', pt: 'Faca', es: ['cuchillo'], trad: 'El cuchillo' },
+                { icon: 'flatware', pt: 'Colher', es: ['cuchara'], trad: 'La cuchara' },
+                { icon: 'local_drink', pt: 'Copo', es: ['vaso'], trad: 'El vaso' },
+                { icon: 'layers', pt: 'Guardanapo', es: ['servilleta'], trad: 'La servilleta' }
+            ],
+            aeroporto: [
+                { icon: 'flight_takeoff', pt: 'Avião', es: ['avión', 'avion'], trad: 'El avión' },
+                { icon: 'luggage', pt: 'Mala / Bagagem', es: ['maleta', 'equipaje'], trad: 'La maleta' },
+                { icon: 'badge', pt: 'Passaporte', es: ['pasaporte'], trad: 'El pasaporte' },
+                { icon: 'confirmation_number', pt: 'Passagem', es: ['billete', 'pasaje'], trad: 'El billete' },
+                { icon: 'connecting_airports', pt: 'Conexão', es: ['conexión', 'conexion'], trad: 'La conexão' },
+                { icon: 'flight_land', pt: 'Pouso', es: ['aterrizaje'], trad: 'El aterrizaje' },
+                { icon: 'terminal', pt: 'Terminal', es: ['terminal'], trad: 'La terminal' },
+                { icon: 'support_agent', pt: 'Comissário', es: ['azafrán', 'azafata', 'auxiliar de vuelo'], trad: 'La azafata' },
+                { icon: 'schedule', pt: 'Voo', es: ['vuelo'], trad: 'El vuelo' },
+                { icon: 'gavel', pt: 'Alfândega', es: ['aduana'], trad: 'La aduana' },
+                { icon: 'car_rental', pt: 'Aluguel de Carros', es: ['alquiler de coches', 'alquiler de autos'], trad: 'El alquiler de coches' },
+                { icon: 'airplane_ticket', pt: 'Cartão de Embarque', es: ['tarjeta de embarque'], trad: 'La tarjeta de embarque' },
+                { icon: 'how_to_reg', pt: 'Check-in', es: ['check-in', 'registro'], trad: 'El check-in' }
+            ],
+            loja: [
+                { icon: 'store', pt: 'Loja', es: ['tienda'], trad: 'La tienda' },
+                { icon: 'sell', pt: 'Preço', es: ['precio'], trad: 'El preço' },
+                { icon: 'payments', pt: 'Dinheiro', es: ['dinero'], trad: 'El dinero' },
+                { icon: 'credit_card', pt: 'Cartão de Crédito', es: ['tarjeta de crédito', 'tarjeta'], trad: 'La tarjeta de crédito' },
+                { icon: 'shopping_cart', pt: 'Carrinho', es: ['carrito de compras', 'carrito'], trad: 'El carrito' },
+                { icon: 'checkroom', pt: 'Provador', es: ['probador'], trad: 'El probador' },
+                { icon: 'checkroom', pt: 'Casaco / Jaqueta', es: ['abrigo', 'chaqueta'], trad: 'El abrigo' },
+                { icon: 'checkroom', pt: 'Saia', es: ['falda'], trad: 'La falda' },
+                { icon: 'checkroom', pt: 'Calça', es: ['pantalón', 'pantalon', 'pantalones'], trad: 'El pantalón' },
+                { icon: 'checkroom', pt: 'Camisa', es: ['camisa'], trad: 'La camisa' },
+                { icon: 'checkroom', pt: 'Camiseta', es: ['camiseta'], trad: 'La camiseta' },
+                { icon: 'checkroom', pt: 'Vestido', es: ['vestido'], trad: 'El vestido' },
+                { icon: 'checkroom', pt: 'Gravata', es: ['corbata'], trad: 'La corbata' },
+                { icon: 'checkroom', pt: 'Sapatos', es: ['zapatos'], trad: 'Los zapatos' },
+                { icon: 'checkroom', pt: 'Meias', es: ['calcetines'], trad: 'Los calcetines' },
+                { icon: 'shopping_bag', pt: 'Bolsa', es: ['bolso', 'bolsa'], trad: 'El bolso' },
+                { icon: 'checkroom', pt: 'Chapéu', es: ['sombrero', 'gorro'], trad: 'El sombrero' },
+                { icon: 'local_offer', pt: 'Desconto', es: ['descuento'], trad: 'El descuento' },
+                { icon: 'receipt', pt: 'Recibo', es: ['recibo', 'factura'], trad: 'El recibo' },
+                { icon: 'loyalty', pt: 'Cliente', es: ['cliente'], trad: 'El cliente' }
+            ],
+            lugares: [
+                { icon: 'add_road', pt: 'Rua', es: ['calle'], trad: 'La calle' },
+                { icon: 'nature_people', pt: 'Praça', es: ['plaza'], trad: 'La plaza' },
+                { icon: 'museum', pt: 'Museu', es: ['museo'], trad: 'El museo' },
+                { icon: 'church', pt: 'Igreja', es: ['iglesia'], trad: 'La igreja' },
+                { icon: 'park', pt: 'Parque', es: ['parque'], trad: 'El parque' },
+                { icon: 'apartment', pt: 'Edifício', es: ['edificio'], trad: 'El edificio' },
+                { icon: 'local_hospital', pt: 'Hospital', es: ['hospital'], trad: 'El hospital' },
+                { icon: 'school', pt: 'Escola', es: ['escuela'], trad: 'La escuela' },
+                { icon: 'local_pharmacy', pt: 'Farmácia', es: ['farmacia'], trad: 'La farmacia' },
+                { icon: 'account_balance', pt: 'Banco', es: ['banco'], trad: 'El banco' },
+                { icon: 'movie', pt: 'Cinema', es: ['cine'], trad: 'El cine' },
+                { icon: 'theater_comedy', pt: 'Teatro', es: ['teatro'], trad: 'El teatro' },
+                { icon: 'beach_access', pt: 'Praia', es: ['playa'], trad: 'La playa' },
+                { icon: 'map', pt: 'Cidade', es: ['ciudad'], trad: 'La cidade' },
+                { icon: 'traffic', pt: 'Semáforo', es: ['semáforo', 'semaforo'], trad: 'El semáforo' }
+            ],
+            hotel: [
+                { icon: 'key', pt: 'Chave do Quarto', es: ['llave'], trad: 'La llave de la habitación' },
+                { icon: 'support_agent', pt: 'Recepção', es: ['recepción', 'recepcion'], trad: 'La recepción' },
+                { icon: 'elevator', pt: 'Elevador', es: ['ascensor', 'elevador'], trad: 'El ascensor' },
+                { icon: 'pool', pt: 'Piscina', es: ['piscina', 'alberca'], trad: 'La piscina' },
+                { icon: 'room_service', pt: 'Serviço de Quarto', es: ['servicio de habitaciones', 'servicio de cuarto'], trad: 'El servicio de habitaciones' },
+                { icon: 'bed', pt: 'Quarto', es: ['habitación', 'habitacion', 'cuarto'], trad: 'La habitación' },
+                { icon: 'wifi', pt: 'Wi-Fi', es: ['wi-fi', 'wifi', 'internet'], trad: 'El Wi-Fi' },
+                { icon: 'local_bar', pt: 'Frigobar', es: ['frigobar', 'minibar'], trad: 'El frigobar' },
+                { icon: 'person', pt: 'Hóspede', es: ['huésped', 'huesped'], trad: 'El huésped' },
+                { icon: 'breakfast_dining', pt: 'Café da Manhã', es: ['desayuno'], trad: 'El desayuno' },
+                { icon: 'ac_unit', pt: 'Ar Condicionado', es: ['aire acondicionado'], trad: 'El aire acondicionado' }
+            ]
+        };
+
+        // ==================== LÓGICA COORDENADORA MÓVEL ====================
         const barraStatus = document.getElementById('barra-status');
+        const conteinerCards = document.getElementById('conteiner-cards');
         let respostasEsperadas = [];
         let elementoCardAtual = null;
         let traducaoParaMostrar = "";
@@ -381,14 +426,49 @@
             if (tela === 'jogo') {
                 document.getElementById('tela-inicial').style.display = 'none';
                 document.getElementById('tela-jogo').style.display = 'flex';
-                barraStatus.style.display = 'block';
+                window.scrollTo(0, 0); 
             } else {
                 document.getElementById('tela-inicial').style.display = 'flex';
                 document.getElementById('tela-jogo').style.display = 'none';
-                barraStatus.style.display = 'none';
+                barraStatus.className = "";
+                barraStatus.innerText = "Escolha uma categoria para começar.";
             }
         }
-        mudarTela('inicial');
+
+        function carregarCategoria(nomeCategoria) {
+            conteinerCards.innerHTML = ""; 
+            
+            const titulos = { 
+                casa: "Em Casa", 
+                restaurante: "No Restaurante", 
+                aeroporto: "No Aeroporto", 
+                loja: "Na Loja / Compras", 
+                lugares: "Lugares Públicos", 
+                hotel: "No Hotel" 
+            };
+            document.getElementById('titulo-categoria').innerText = titulos[nomeCategoria];
+
+            bancoCategorias[nomeCategoria].forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card-item';
+                card.dataset.es = JSON.stringify(item.es);
+                card.dataset.trad = item.trad;
+                
+                card.onclick = function() {
+                    dispararEscuta(this);
+                };
+
+                card.innerHTML = `
+                    <span class="material-icons">${item.icon}</span>
+                    <span class="nome-pt">${item.pt}</span>
+                    <div class="confere-traducao"></div>
+                `;
+                
+                conteinerCards.appendChild(card);
+            });
+
+            mudarTela('jogo');
+        }
 
         const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
         let gravador = null;
@@ -401,14 +481,16 @@
 
             gravador.onresult = (event) => {
                 const falaUsuario = event.results[0][0].transcript.trim().toLowerCase();
-                const falaLimpa = falaUsuario.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+                
+                // Filtro avançado e limpo: remove pontuações sem usar caracteres de risco
+                const falaLimpa = falaUsuario.replace(/[^\w\sáéíóúñÁÉÍÓÚÑ]/g, "");
 
                 if (respostasEsperadas.includes(falaLimpa)) {
                     barraStatus.className = "status-acerto";
-                    barraStatus.innerText = `¡Perfeito! Você disse: "${falaUsuario}"`;
+                    barraStatus.innerText = "¡Perfeito! Você disse: " + falaUsuario;
                 } else {
                     barraStatus.className = "status-erro";
-                    barraStatus.innerText = `Ops, ouvi: "${falaUsuario}".`;
+                    barraStatus.innerText = "Ops, ouvi: " + falaUsuario;
                 }
 
                 if (elementoCardAtual) {
@@ -424,15 +506,15 @@
             };
         }
 
-        function escutarItem(elementoCard, listaEspanhol, stringTraducao) {
+        function dispararEscuta(elementoCard) {
             if (!gravador) {
                 barraStatus.innerText = "Recurso de voz indisponível.";
                 return;
             }
 
             elementoCardAtual = elementoCard;
-            respostasEsperadas = listaEspanhol;
-            traducaoParaMostrar = stringTraducao;
+            respostasEsperadas = JSON.parse(elementoCard.dataset.es);
+            traducaoParaMostrar = elementoCard.dataset.trad;
 
             barraStatus.className = "status-escutando";
             barraStatus.innerText = "Ouvindo... Fale em Espanhol!";
